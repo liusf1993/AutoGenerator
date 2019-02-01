@@ -70,13 +70,19 @@ import org.apache.commons.lang.StringUtils;
 public class GeneratorMainDialog extends JDialog {
 
   private static final long serialVersionUID = -930983678109055869L;
+  private static final Logger logger = Logger.getInstance(GeneratorMainDialog.class);
+  static String[] colNames = ColumnEnum.getColumnNames(); //表头信息
+  private final FileChooserDescriptor chooseFolderOnlyDescriptor = FileChooserDescriptorFactory.createSingleFolderDescriptor();
+  //样式
+  EditorColorsScheme colorScheme;
+  Color background;
+  JBTable jtable;
+  String path;
   /**
    * overall
    */
   private JPanel contentPane;
   private JTextPane TEXT_msg;
-
-
   /**
    * input
    */
@@ -84,7 +90,6 @@ public class GeneratorMainDialog extends JDialog {
   private JPanel PN_input;
   private JTextArea INPUT_sql;
   private JButton BTN_analy;
-
   /**
    * generator
    */
@@ -99,37 +104,29 @@ public class GeneratorMainDialog extends JDialog {
   private JButton BTN_sqlmap;
   private JButton BTN_do;
   private JButton BTN_all;
-
   private JComboBox SELECT_code;
   private JComboBox SELECT_encoding;
   private JTextField INPUT_path;
   private JButton BTN_selPath;
-
   private JCheckBox CHK_overwrite;
   private JCheckBox CHK_generateBase;
-
   private JCheckBox CHK_daoLogicDel;
   private JCheckBox CHK_daoUseSeq;
   private JCheckBox CHK_managerUseBO;
   private JCheckBox CHK_pageQuery;
-
   private JScrollPane PANEL_c;
   private JTextField INPUT_tableName;
   private JButton BTN_basedao;
   private JButton BTN_basequery;
-
   /**
    * settings
    */
   private JPanel PN_settings;
-
   private JLabel TEXT_name;
   private JLabel TEXT_encoding;
   private JLabel TEXT_code;
-
   private JRadioButton RADIO_languageChs;
   private JRadioButton RADIO_languageEn;
-
   private JRadioButton RADIO_encodeUTF8;
   private JRadioButton RADIO_encodeGBK;
   private JRadioButton RADIO_codeJava;
@@ -137,13 +134,11 @@ public class GeneratorMainDialog extends JDialog {
   private JButton BTN_apply;
   private JTextField INPUT_author;
   private JLabel TEXT_info;
-
   private JCheckBox CHK_useCustomTpl;
   private JTextField INPUT_tplPath;
   private JLabel TEXT_useCustomTpl;
   private JLabel TEXT_customTplPath;
   private JButton BTN_selTplPath;
-
   /**
    * Notice
    */
@@ -152,23 +147,12 @@ public class GeneratorMainDialog extends JDialog {
   private JButton BTN_DAOXml;
   private JButton BTN_SQLMapConfigXml;
   private JButton BTN_PersistenceXml;
-
   /**
    * about
    */
   private JLabel LABEL_about;
   private JButton BTN_tplInit;
-
-
   private Column primaryColumn;
-  private final FileChooserDescriptor chooseFolderOnlyDescriptor = FileChooserDescriptorFactory.createSingleFolderDescriptor();
-  //样式
-  EditorColorsScheme colorScheme;
-  Color background;
-  JBTable jtable;
-  static String[] colNames = ColumnEnum.getColumnNames(); //表头信息
-  String path;
-  private static final Logger logger = Logger.getInstance(GeneratorMainDialog.class);
 
   public GeneratorMainDialog() {
     colorScheme = EditorColorsManager.getInstance().getGlobalScheme();
@@ -822,6 +806,36 @@ public class GeneratorMainDialog extends JDialog {
 
   }
 
+  private void onApply() {
+    String author = INPUT_author.getText();
+    Encoding encoding = Encoding.UTF8;
+    if (RADIO_encodeGBK.isSelected()) {
+      encoding = Encoding.GBK;
+    }
+    Code code = Code.JAVA;
+    if (RADIO_codeScala.isSelected()) {
+      code = Code.SCALA;
+    }
+    Setting settingSave = new Setting(author, encoding, code);
+    boolean useTpl = CHK_useCustomTpl.isSelected();
+    settingSave.setTplUseCustom(useTpl);
+    if (useTpl) {
+      String tp = INPUT_tplPath.getText();
+      if (tp == null || tp.trim().equals("")) {
+        TEXT_msg.setText("please set the custom tpl path!");
+      } else {
+        settingSave.setTplPath(tp);
+      }
+    }
+
+    SettingManager.applyApp(settingSave);
+    TEXT_msg.setText("apply success!");
+
+  }
+
+  private void onCancel() {
+    dispose();
+  }
 
   class CheckBoxRenderer extends JCheckBox implements TableCellRenderer {
 
@@ -875,37 +889,6 @@ public class GeneratorMainDialog extends JDialog {
       checkBox.setSelected((Boolean) value);
       return checkBox;
     }
-  }
-
-  private void onApply() {
-    String author = INPUT_author.getText();
-    Encoding encoding = Encoding.UTF8;
-    if (RADIO_encodeGBK.isSelected()) {
-      encoding = Encoding.GBK;
-    }
-    Code code = Code.JAVA;
-    if (RADIO_codeScala.isSelected()) {
-      code = Code.SCALA;
-    }
-    Setting settingSave = new Setting(author, encoding, code);
-    boolean useTpl = CHK_useCustomTpl.isSelected();
-    settingSave.setTplUseCustom(useTpl);
-    if (useTpl) {
-      String tp = INPUT_tplPath.getText();
-      if (tp == null || tp.trim().equals("")) {
-        TEXT_msg.setText("please set the custom tpl path!");
-      } else {
-        settingSave.setTplPath(tp);
-      }
-    }
-
-    SettingManager.applyApp(settingSave);
-    TEXT_msg.setText("apply success!");
-
-  }
-
-  private void onCancel() {
-    dispose();
   }
 
 

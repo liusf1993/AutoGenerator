@@ -1,16 +1,15 @@
 package cn.fishy.plugin.idea.auto.generator;
 
-import cn.fishy.plugin.idea.auto.constant.TypePath;
-import cn.fishy.plugin.idea.auto.domain.Setting;
-import cn.fishy.plugin.idea.auto.storage.Env;
 import cn.fishy.plugin.idea.auto.constant.GenerateType;
+import cn.fishy.plugin.idea.auto.constant.TypePath;
 import cn.fishy.plugin.idea.auto.domain.Code;
 import cn.fishy.plugin.idea.auto.domain.Column;
+import cn.fishy.plugin.idea.auto.domain.Setting;
+import cn.fishy.plugin.idea.auto.storage.Env;
 import cn.fishy.plugin.idea.auto.storage.SettingManager;
 import cn.fishy.plugin.idea.auto.util.FileWriter;
 import cn.fishy.plugin.idea.auto.util.NameUtil;
 import cn.fishy.plugin.idea.auto.util.PathHolder;
-
 import java.util.List;
 
 /**
@@ -46,8 +45,22 @@ public class GeneratorAdaptor {
     }
   }
 
-  public void setPrimaryColumn(Column primaryColumn) {
-    this.primaryColumn = primaryColumn;
+  public static String getJavaPath(String scalaPath) {
+    String markScala = "/src/main/scala";
+    String markJava = "/src/main/java";
+    int i = scalaPath.indexOf(markScala);
+    if (i > -1) {
+      return scalaPath.replace(markScala, markJava);
+    } else {
+      return scalaPath.replaceAll("\\/scala\\/", "/java/");
+    }
+  }
+
+  public static void main(String[] args) throws Exception {
+    String s = "/Users/project/ska/src/main/scala/com/taobao/biz";
+    System.out.println(getJavaPath(s));
+    s = "/Users/project/ska/src1/main/scala/com/taobao/biz";
+    System.out.println(getJavaPath(s));
   }
 
   public void setColumnList(List<Column> doColumnList, List<Column> queryColumnList) {
@@ -59,7 +72,6 @@ public class GeneratorAdaptor {
     return columnList;
   }
 
-
   private String path(GenerateType generateType) {
     String ph = PathHolder.resourcesPath + generateType.getPath();
     if (TypePath.SRC.equals(generateType.getTypePath())) {
@@ -68,17 +80,6 @@ public class GeneratorAdaptor {
       ph = PathHolder.resourcesPath + generateType.getPath();
     }
     return ph;
-  }
-
-  public static String getJavaPath(String scalaPath) {
-    String markScala = "/src/main/scala";
-    String markJava = "/src/main/java";
-    int i = scalaPath.indexOf(markScala);
-    if (i > -1) {
-      return scalaPath.replace(markScala, markJava);
-    } else {
-      return scalaPath.replaceAll("\\/scala\\/", "/java/");
-    }
   }
 
   public boolean generateBaseDAO() {
@@ -148,7 +149,7 @@ public class GeneratorAdaptor {
     String name = name(generateType);
     String path = path(generateType);
     String entityName = entityName();
-    String s = generator.generate(generateType,name,entityName,null);
+    String s = generator.generate(generateType, name, entityName, null);
     switch (generateType) {
       case Service:
         return FileWriter.write(path, addExt(name), r(s));
@@ -217,7 +218,8 @@ public class GeneratorAdaptor {
   public String name(GenerateType type) {
     return NameUtil.name(this.tableName, type);
   }
-  public String entityName(){
+
+  public String entityName() {
     return NameUtil.formatName(tableName);
   }
 
@@ -229,48 +231,52 @@ public class GeneratorAdaptor {
     return name + ".xml";
   }
 
-  public void setCode(String code) {
-    this.code = code;
-  }
-
-  public void setDoColumnList(List<Column> doColumnList) {
-    this.doColumnList = doColumnList;
-  }
-
-  public void setPath(String path) {
-    this.path = path;
-  }
-
-  public void setQueryColumnList(List<Column> queryColumnList) {
-    this.queryColumnList = queryColumnList;
-  }
-
-  public void setTableName(String tableName) {
-    this.tableName = tableName;
-  }
-
   public String getCode() {
     return code;
+  }
+
+  public void setCode(String code) {
+    this.code = code;
   }
 
   public List<Column> getDoColumnList() {
     return doColumnList;
   }
 
+  public void setDoColumnList(List<Column> doColumnList) {
+    this.doColumnList = doColumnList;
+  }
+
   public Column getPrimaryColumn() {
     return primaryColumn;
+  }
+
+  public void setPrimaryColumn(Column primaryColumn) {
+    this.primaryColumn = primaryColumn;
   }
 
   public List<Column> getQueryColumnList() {
     return queryColumnList;
   }
 
+  public void setQueryColumnList(List<Column> queryColumnList) {
+    this.queryColumnList = queryColumnList;
+  }
+
   public String getTableName() {
     return tableName;
   }
 
+  public void setTableName(String tableName) {
+    this.tableName = tableName;
+  }
+
   public String getPath() {
     return path;
+  }
+
+  public void setPath(String path) {
+    this.path = path;
   }
 
   public CodeAbstractGenerator getGenerator() {
@@ -280,7 +286,6 @@ public class GeneratorAdaptor {
   public void setGenerator(CodeAbstractGenerator generator) {
     this.generator = generator;
   }
-
 
   public byte[] r(String s) {
     if (s == null) {
@@ -294,13 +299,6 @@ public class GeneratorAdaptor {
       return null;
     }
     return new String(s.getBytes(Env.encodeTo), Env.encodeFrom);
-  }
-
-  public static void main(String[] args) throws Exception {
-    String s = "/Users/project/ska/src/main/scala/com/taobao/biz";
-    System.out.println(getJavaPath(s));
-    s = "/Users/project/ska/src1/main/scala/com/taobao/biz";
-    System.out.println(getJavaPath(s));
   }
 
 }

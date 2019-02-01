@@ -5,14 +5,13 @@ import cn.fishy.plugin.idea.auto.generator.java.JavaPersistenceXmlGenerator;
 
 
 /**
- * User: duxing
- * Date: 2015-08-17 00:38
+ * User: duxing Date: 2015-08-17 00:38
  */
 public class ScalaPersistenceXmlGenerator extends JavaPersistenceXmlGenerator {
 
-    @Override
-    public Code getCode() {
-        return Code.SCALA;
-    }
+  @Override
+  public Code getCode() {
+    return Code.SCALA;
+  }
 
 }

@@ -10,13 +10,12 @@ import cn.fishy.plugin.idea.auto.storage.SettingManager;
 import cn.fishy.plugin.idea.auto.util.NameUtil;
 import cn.fishy.plugin.idea.auto.util.PathHolder;
 import cn.fishy.plugin.idea.auto.util.TemplateUtil;
-import org.apache.commons.httpclient.util.DateUtil;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.apache.commons.httpclient.util.DateUtil;
 
 /**
  * User: duxing Date: 2015-08-15 16:19
@@ -24,13 +23,14 @@ import java.util.Map;
 public class BaseGenerator {
 
   protected static List<String> deleteKeyList = new ArrayList<String>();
-  protected GenerateType generateType = GenerateType.DO;
 
   static {
     deleteKeyList.add("IS_DELETE");
     deleteKeyList.add("IS_DELETED");
     deleteKeyList.add("DELETED");
   }
+
+  protected GenerateType generateType = GenerateType.DO;
 
   public BaseGenerator(GenerateType generateType) {
     this.generateType = generateType;
@@ -45,22 +45,22 @@ public class BaseGenerator {
   }
 
   public String generate(String className, String queryClassName, String daoClassName, Column primaryKeyColumn) {
-    Map<String,Object> map = initMap();
-    map.put("objClassName",className);
+    Map<String, Object> map = initMap();
+    map.put("objClassName", className);
     map.put("objPropertyName", NameUtil.lowFirst(className));
     map.put("className", className);
     map.put("queryClassName", queryClassName);
     map.put("queryPropertyName", NameUtil.lowFirst(queryClassName));
-    try{
+    try {
       map.put("primaryKeyName", primaryKeyColumn.getProperty());
       String type = primaryKeyColumn.getType();
       map.put("primaryKeyType", type);
-    }catch (Exception e){
+    } catch (Exception e) {
       map.put("primaryKeyName", "id");
       map.put("primaryKeyType", "Long");
     }
     List<String> importList = getImportList(primaryKeyColumn, false, true);
-    importList.add(PathHolder.impt(GenerateType.DO,className));
+    importList.add(PathHolder.impt(GenerateType.DO, className));
 
 //        importList.add(PathHolder.impt(GenerateType.BaseDAO, GenerateType.BaseDAO.getName()));
     map.put("importList", importList);
@@ -70,8 +70,8 @@ public class BaseGenerator {
   }
 
   public String generate(String className, String entityName, String dependencyName) {
-    Map<String,Object> map = initMap();
-    map.put("objClassName",entityName);
+    Map<String, Object> map = initMap();
+    map.put("objClassName", entityName);
     map.put("objPropertyName", NameUtil.lowFirst(className));
     map.put("className", className);
     Setting setting = SettingManager.get();
