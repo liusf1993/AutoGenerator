@@ -157,6 +157,10 @@ public class GeneratorMainDialog extends JDialog {
    */
   private JButton BTN_tplInit;
   private Column primaryColumn;
+  /**
+   * about
+   */
+  private JLabel LABEL_about;
 
   public GeneratorMainDialog() {
     colorScheme = EditorColorsManager.getInstance().getGlobalScheme();
