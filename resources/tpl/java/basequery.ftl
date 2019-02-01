@@ -6,7 +6,7 @@ import java.io.Serializable;
  * BaseQuery
  * Date: ${today}
  * Generate by autoBaseQuery
- * Powered by duxing@Taobao
+
  */
 
 public class BaseQuery implements Serializable {

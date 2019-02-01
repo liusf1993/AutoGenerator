@@ -33,6 +33,22 @@ public class JavaDoGenerator extends BaseGenerator implements DoGenerator {
         map.put("importList", importList);
         return super.generate(map);
     }
+    public String generateWithDbName(String tableName,String className, List<Column> columnList) {
+        Map<String,Object> map = initMap();
+        map.put("tableName",tableName);
+        map.put("className",className);
+        map.put("columnList", columnList);
+        List<String> importList = getImportList(columnList, true);
+        if(generateType().equals(GenerateType.Query)){
+            Setting setting = SettingManager.get();
+            map.put("pagerQuery",setting.isPagerQuery());
+            importList.add(PathHolder.impt(GenerateType.BaseQuery, GenerateType.BaseQuery.getName()));
+        }else{
+            map.put("pagerQuery",false);
+        }
+        map.put("importList", importList);
+        return super.generate(map);
+    }
 
     @Override
     public Code getCode() {

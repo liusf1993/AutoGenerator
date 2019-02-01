@@ -9,8 +9,6 @@ import ${import};
  *
  * User: ${user}
  * Date: ${today}
- * Generate by ${autoName}
- * Powered by duxing@Taobao
  */
 
 public class ${className} <#if pagerQuery>extends BaseQuery<#else>implements Serializable</#if>{

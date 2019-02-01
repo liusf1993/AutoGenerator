@@ -1,5 +1,6 @@
 package cn.fishy.plugin.idea.auto.generator;
 
+import cn.fishy.plugin.idea.auto.constant.GenerateType;
 import cn.fishy.plugin.idea.auto.domain.Column;
 import cn.fishy.plugin.idea.auto.generator.scala.ScalaBaseDAOGenerator;
 import cn.fishy.plugin.idea.auto.generator.scala.ScalaBaseQueryGenerator;
@@ -29,7 +30,7 @@ public class ScalaGenerator extends CodeAbstractGenerator {
     }
 
     @Override
-    public String generateDO(String doClassName, List<Column> columnList) {
+    public String generateDO(String tableName, String doClassName, List<Column> columnList) {
         return new ScalaDoGenerator().generate(doClassName, columnList);
     }
 
@@ -96,5 +97,10 @@ public class ScalaGenerator extends CodeAbstractGenerator {
     @Override
     public String generatePersistenceXml(String tableName) {
         return new ScalaPersistenceXmlGenerator().generate(tableName);
+    }
+
+    @Override
+    public String generate(GenerateType generateType, String className, String entityName, String dependencyClass) {
+        return null;
     }
 }

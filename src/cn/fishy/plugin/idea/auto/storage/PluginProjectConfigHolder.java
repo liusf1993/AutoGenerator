@@ -17,8 +17,8 @@ import org.jetbrains.annotations.Nullable;
 @com.intellij.openapi.components.State(
         name = "PluginProjectConfig",
         storages = {
-                @Storage(id = "default", file = StoragePathMacros.PROJECT_FILE),
-                @Storage(id = "dir", file = StoragePathMacros.PROJECT_CONFIG_DIR + "/autoProjectGenerator.xml", scheme = StorageScheme.DIRECTORY_BASED)
+                @Storage( file = StoragePathMacros.WORKSPACE_FILE),
+                @Storage( file = StoragePathMacros.WORKSPACE_FILE + "/autoProjectGenerator.xml", scheme = StorageScheme.DIRECTORY_BASED)
         }
 )
 public class PluginProjectConfigHolder implements PersistentStateComponent<PluginProjectConfig> {

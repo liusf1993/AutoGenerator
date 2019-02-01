@@ -12,8 +12,8 @@ import org.springframework.stereotype.Repository
  *
  * User: ${user}
  * Date: ${today}
- * Generate by ${autoName}
- * Powered by duxing@Taobao
+
+
  */
 
 //@ChildOf(parent = "baseDAO")

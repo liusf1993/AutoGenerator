@@ -15,6 +15,7 @@ public class Column {
     private String comment;
     private boolean isPrimaryKey;
     private String property;
+    private String dbField;
 
     public Column() {
     }
@@ -63,6 +64,20 @@ public class Column {
 
     public void setIsPrimaryKey(boolean isPrimaryKey) {
         this.isPrimaryKey = isPrimaryKey;
+    }
+
+    public Column setPrimaryKey(boolean primaryKey) {
+        isPrimaryKey = primaryKey;
+        return this;
+    }
+
+    public String getDbField() {
+        return dbField;
+    }
+
+    public Column setDbField(String dbField) {
+        this.dbField = dbField;
+        return this;
     }
 
     public String toString(){

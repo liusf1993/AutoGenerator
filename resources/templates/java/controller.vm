@@ -1,0 +1,20 @@
+package ${package};
+
+#foreach($import in $!{importList})
+    #if("$!{import}"!="")
+    import $!{import};
+    #end
+#end
+/**
+*
+* User: ${user}
+* Date: ${today}
+
+
+*/
+
+public class $className{
+
+
+
+}

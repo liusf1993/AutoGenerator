@@ -11,8 +11,8 @@ import ${import}
  *
  * User: ${user}
  * Date: ${today}
- * Generate by ${autoName}
- * Powered by duxing@Taobao
+
+
  */
 @SerialVersionUID(-1L)
 class ${className} <#if pagerQuery>extends BaseQuery<#else>extends Serializable</#if>{

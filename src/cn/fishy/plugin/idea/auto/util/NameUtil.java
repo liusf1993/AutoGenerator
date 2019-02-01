@@ -41,14 +41,8 @@ public class NameUtil {
         return lowFirst(formatName(s));
     }
 
-    public static String name(String s, GenerateType generateType){
-        if(generateType.equals(GenerateType.SQLMap)){
-            return s.toLowerCase()+generateType.getSuffix();
-        }else if(generateType.equals(GenerateType.BaseDAO) || generateType.equals(GenerateType.BaseQuery)){
-            return generateType.getSuffix();
-        }else{
-            return formatName(s) + generateType.getSuffix();
-        }
+    public static String name(String s, GenerateType generateType) {
+        return generateType.getPrefix()+formatName(s) + generateType.getSuffix();
     }
 
 }

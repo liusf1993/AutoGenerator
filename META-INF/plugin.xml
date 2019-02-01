@@ -1,4 +1,4 @@
-<idea-plugin version="2">
+<idea-plugin>
   <id>com.fishy.plugin.idea.auto</id>
   <name>Auto Generator</name>
   <version>1.1.0</version>

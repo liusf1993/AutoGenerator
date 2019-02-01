@@ -25,7 +25,7 @@ public class JavaManagerImplGenerator extends BaseGenerator implements ManagerIm
         List<String> importList = getImportList(primaryKeyColumn,false,true);
         importList.add(PathHolder.impt(GenerateType.Manager,managerClassName));
         importList.add(PathHolder.impt(GenerateType.DAO,daoClassName));
-        importList.add(PathHolder.impt(GenerateType.Query,queryClassName));
+
         Map<String,Object> map = initMap();
         map.put("className", managerImplClassName);
         map.put("doClassName", doClassName);

@@ -9,8 +9,8 @@ import ${import};
  *
  * User: ${user}
  * Date: ${today}
- * Generate by ${autoName}
- * Powered by duxing@Taobao
+
+
  */
 
 public class ${transferClassName}{

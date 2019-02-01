@@ -18,7 +18,7 @@ public class PomNamespaceContext implements NamespaceContext {
         else if ("xsi".equals(prefix)) return "http://www.w3.org/2001/XMLSchema-instance";
         else if ("schema".equals(prefix)) return "http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd";
         else if ("xml".equals(prefix)) return XMLConstants.XML_NS_URI;
-        return XMLConstants.NULL_NS_URI;
+        return XMLConstants.DEFAULT_NS_PREFIX;
     }
 
     @Override

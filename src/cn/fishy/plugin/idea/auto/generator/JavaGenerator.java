@@ -1,5 +1,6 @@
 package cn.fishy.plugin.idea.auto.generator;
 
+import cn.fishy.plugin.idea.auto.constant.GenerateType;
 import cn.fishy.plugin.idea.auto.domain.Column;
 import cn.fishy.plugin.idea.auto.generator.java.JavaBaseDAOGenerator;
 import cn.fishy.plugin.idea.auto.generator.java.JavaBaseQueryGenerator;
@@ -25,12 +26,12 @@ import java.util.List;
 public class JavaGenerator extends CodeAbstractGenerator {
     @Override
     public String space() {
-        return "    ";
+        return "  ";
     }
 
     @Override
-    public String generateDO(String doClassName, List<Column> columnList) {
-        return new JavaDoGenerator().generate(doClassName, columnList);
+    public String generateDO(String tableName, String doClassName, List<Column> columnList) {
+        return new JavaDoGenerator().generateWithDbName(tableName,doClassName, columnList);
     }
 
     @Override
@@ -96,5 +97,10 @@ public class JavaGenerator extends CodeAbstractGenerator {
     @Override
     public String generatePersistenceXml(String tableName) {
         return new JavaPersistenceXmlGenerator().generate(tableName);
+    }
+
+    @Override
+    public String generate(GenerateType generateType, String className, String entityName, String dependencyClass) {
+        return new BaseGenerator(generateType).generate(className,entityName,dependencyClass);
     }
 }

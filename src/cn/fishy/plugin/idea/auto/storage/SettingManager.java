@@ -24,7 +24,7 @@ public class SettingManager {
             setting.setTplUseCustom(pluginConfig.tplUseCustom);
             setting.setTplPath(pluginConfig.tplPathCustom);
         }else {
-            setting.setAuthor("duxing //change at Setting Tab");
+            setting.setAuthor("admin");
             setting.setLanguage(Language.EN.getName());
             setting.setCode(Code.JAVA.getName());
             setting.setEncoding(Encoding.UTF8.getName());

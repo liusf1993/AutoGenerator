@@ -13,8 +13,8 @@ import org.springframework.stereotype.Service
  *
  * User: ${user}
  * Date: ${today}
- * Generate by ${autoName}
- * Powered by duxing@Taobao
+
+
  */
 @Service("${managerPropertyName}")
 class ${className} extends ${managerClassName}{

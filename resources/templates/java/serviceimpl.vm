@@ -15,7 +15,7 @@ import $!{import};
 
  */
 
-public class ${className} implements ${managerClassName}{
+public class ${className} implements I${objClassName}Service{
 
 
 

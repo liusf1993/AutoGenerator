@@ -10,7 +10,7 @@ import java.io.Serializable;
 public class PluginConfig implements Serializable {
     private static final long serialVersionUID = -2408231700721356773L;
 
-    public String author = "duxing //change at Setting Tab";
+    public String author = "hqjl";
     public String language = "english";
     public String code = "JAVA";
     public String encoding = "UTF-8";

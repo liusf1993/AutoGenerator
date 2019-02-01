@@ -10,8 +10,8 @@ import scala.collection.JavaConversions._
  *
  * User: ${user}
  * Date: ${today}
- * Generate by ${autoName}
- * Powered by duxing@Taobao
+
+
  */
 
 object ${transferClassName}{

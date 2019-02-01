@@ -19,6 +19,6 @@ public class JavaBaseQueryGenerator extends BaseGenerator {
 
     @Override
     public GenerateType generateType() {
-        return GenerateType.BaseQuery;
+        return null;
     }
 }

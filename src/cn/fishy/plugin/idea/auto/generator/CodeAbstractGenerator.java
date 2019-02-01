@@ -1,5 +1,6 @@
 package cn.fishy.plugin.idea.auto.generator;
 
+import cn.fishy.plugin.idea.auto.constant.GenerateType;
 import cn.fishy.plugin.idea.auto.domain.Column;
 import com.intellij.openapi.util.io.FileUtil;
 
@@ -18,7 +19,7 @@ public abstract class CodeAbstractGenerator {
         return "\r\n";
     }
 
-    public abstract String generateDO(String doClassName,List<Column> columnList);
+    public abstract String generateDO(String tableName, String doClassName, List<Column> columnList);
     public abstract String generateDAO(String doClassName,String queryClassName,String daoClassName,Column primaryKeyColumn);
     public abstract String generateDAOImpl(String doClassName,String queryClassName,String daoClassName,String daoImplClassName,Column primaryKeyColumn,String tableName);
     public abstract String generateQuery(String queryClassName,List<Column> columnQueryList);
@@ -32,6 +33,7 @@ public abstract class CodeAbstractGenerator {
     public abstract String generateDAOXml(String daoClassName, String daoImplClassName);
     public abstract String generateSQLMapConfigXml(String tableName);
     public abstract String generatePersistenceXml(String tableName);
+    public abstract String generate(GenerateType generateType, String className, String entityName, String dependencyClass);
 
     public static void writeToFile(File file,String fileContent){
         try {

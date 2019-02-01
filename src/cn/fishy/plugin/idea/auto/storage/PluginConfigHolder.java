@@ -18,7 +18,7 @@ import org.jetbrains.annotations.Nullable;
         name = "PluginConfig",
         storages = {
                 @Storage(
-                        file = StoragePathMacros.APP_CONFIG + "/autoGenerator.xml"
+                        file = StoragePathMacros.WORKSPACE_FILE + "/autoGenerator.xml"
                 )}
 )
 public class PluginConfigHolder implements PersistentStateComponent<PluginConfig> {

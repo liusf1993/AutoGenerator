@@ -28,14 +28,15 @@ public class JavaDaoGenerator extends BaseGenerator implements DaoGenerator {
         map.put("queryPropertyName", NameUtil.lowFirst(queryClassName));
         try{
             map.put("primaryKeyName", primaryKeyColumn.getProperty());
-            map.put("primaryKeyType", primaryKeyColumn.getType());
+            String type = primaryKeyColumn.getType();
+            map.put("primaryKeyType", type);
         }catch (Exception e){
             map.put("primaryKeyName", "id");
             map.put("primaryKeyType", "Long");
         }
         List<String> importList = getImportList(primaryKeyColumn, false, true);
         importList.add(PathHolder.impt(GenerateType.DO,doClassName));
-        importList.add(PathHolder.impt(GenerateType.Query,queryClassName));
+
 //        importList.add(PathHolder.impt(GenerateType.BaseDAO, GenerateType.BaseDAO.getName()));
         map.put("importList", importList);
         Setting setting = SettingManager.get();

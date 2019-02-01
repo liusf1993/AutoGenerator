@@ -14,7 +14,7 @@ import com.taobao.tddl.client.sequence.Sequence;
  * BaseDAO
  * Date: ${today}
  * Generate by autoBaseDAO
- * Powered by duxing@Taobao
+
  */
 public class BaseDAO implements InitializingBean {
 

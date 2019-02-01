@@ -18,11 +18,14 @@ import java.util.Map;
  * Date: 2015.08.13 1:35
  */
 public class JavaManagerGenerator extends BaseGenerator implements ManagerGenerator {
+
+
+
     @Override
     public String generate(String objClassName, String queryClassName, String managerClassName, Column primaryKeyColumn) {
         Setting setting = SettingManager.get();
         List<String> importList = getImportList(primaryKeyColumn, false, true);
-        importList.add(PathHolder.impt(GenerateType.Query, queryClassName));
+        //importList.add(PathHolder.impt(GenerateType.Query, queryClassName));
         if(setting.isManagerUseBO()) {
             importList.add(PathHolder.impt(GenerateType.BO, objClassName));
         }else{

@@ -75,10 +75,10 @@ public class SqlAnaly {
         return "table";
     }
     public static String analyPrimaryKey(String sql){
-        String regStr = "primary\\s+key\\s+\\(([^\\)]*)\\)";
-        List<String> matches = Matcher.match(regStr, 1, sql);
+        String regStr = "(,|\\().*\\s+primary\\s+key";
+        List<String> matches = Matcher.match(regStr.toLowerCase(), 0, sql);
         if(matches!=null&&matches.size()==1){
-            return matches.get(0).replaceAll("`|'|\"|\\s","");
+            return matches.get(0).substring(1).trim().split(" ")[0];
         }
         return null;
     }
@@ -163,17 +163,15 @@ public class SqlAnaly {
         List<Column> colList = new ArrayList<Column>();
         if(lines!=null && lines.size()>0){
             for(String line:lines){
-                if(StringUtils.isNotBlank(line)) {
-                    line = line.trim();
-                    if (!isKeyLine(line)) {
-                        try {
-                            Column c = getColumn(line);
-                            if(c!=null) {
-                                colList.add(c);
-                            }
-                        }catch (Exception e){}
-                    }
+              if (StringUtils.isNotBlank(line)) {
+                line = line.trim();
+                Column c = getColumn(line);
+                if (c != null) {
+                  c.setIsPrimaryKey(isKeyLine(line));
+                  colList.add(c);
                 }
+
+              }
             }
         }
         String k = analyPrimaryKey(sql);
