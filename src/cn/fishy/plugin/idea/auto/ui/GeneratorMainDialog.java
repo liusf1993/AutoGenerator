@@ -71,13 +71,18 @@ public class GeneratorMainDialog extends JDialog {
 
   private static final long serialVersionUID = -930983678109055869L;
   private static final Logger logger = Logger.getInstance(GeneratorMainDialog.class);
-  static String[] colNames = ColumnEnum.getColumnNames(); //表头信息
+  /**
+   * header info
+   */
+  static String[] colNames = ColumnEnum.getColumnNames();
   private final FileChooserDescriptor chooseFolderOnlyDescriptor = FileChooserDescriptorFactory.createSingleFolderDescriptor();
-  //样式
-  EditorColorsScheme colorScheme;
-  Color background;
-  JBTable jtable;
-  String path;
+  /**
+   * color schema
+   */
+  private EditorColorsScheme colorScheme;
+  private Color background;
+  private JBTable jtable;
+  private String path;
   /**
    * overall
    */
@@ -150,7 +155,6 @@ public class GeneratorMainDialog extends JDialog {
   /**
    * about
    */
-  private JLabel LABEL_about;
   private JButton BTN_tplInit;
   private Column primaryColumn;
 
